@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4e9dc" />
+  <title>BodyRaa — Body Shape & Style Studio</title>
+  <style>
+:root{--cream:#f8f3ec;--paper:#fffdf9;--sand:#e9d9c8;--tan:#c7a98e;--brown:#765743;--deep:#4b382d;--muted:#927e6e;--line:#e9dfd4;--sage:#a8aa91;--shadow:0 18px 50px rgba(86,62,43,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.65}.app-shell{max-width:1440px;margin:auto;padding:0 6.2%}.topbar{height:92px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--deep);font-family:'Playfair Display',serif;font-size:25px;font-weight:700;line-height:1}.brand-mark{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:var(--brown);color:#fff8ef;font-size:23px;font-style:italic}.brand-dot{color:#b88962}.brand small{display:block;font:600 8px 'DM Sans';letter-spacing:2px;color:var(--muted);margin-top:6px}.desktop-nav{display:flex;gap:36px}.nav-link{border:0;background:none;color:var(--muted);font:600 12px 'DM Sans';cursor:pointer;padding:12px 0;position:relative}.nav-link.active,.nav-link:hover{color:var(--deep)}.nav-link.active:after{content:'';height:2px;background:var(--tan);position:absolute;bottom:0;left:0;right:0}.menu-toggle{display:none;border:0;background:none;font-size:22px;color:var(--deep)}
+.page{display:none;animation:fade .35s ease}.page.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(7px)}to{opacity:1;transform:none}}.hero{display:grid;grid-template-columns:1fr 1fr;min-height:590px;align-items:center;gap:50px;padding:55px 0 65px}.eyebrow,.step-label{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--brown)}.eyebrow i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#b38c6d;margin-right:8px}.hero h1,.page-heading h1{font:500 clamp(43px,5vw,68px)/1.12 'Playfair Display',serif;letter-spacing:-1.5px;margin:23px 0 20px}.hero h1 em,.page-heading h1 em,.method-card h2 em{color:#a47c5c;font-weight:500}.hero-lead{max-width:480px;color:var(--muted);font-size:14px;line-height:1.9}.hero-actions{display:flex;align-items:center;gap:22px;margin-top:30px;flex-wrap:wrap}.btn{border:0;cursor:pointer;font:700 11px 'DM Sans';letter-spacing:.2px;padding:15px 21px;border-radius:3px;transition:.2s}.btn-primary{background:var(--brown);color:#fffaf4;box-shadow:0 7px 18px #76574325}.btn-primary:hover{background:var(--deep);transform:translateY(-2px)}.btn-primary span{margin-left:15px;font-size:16px}.btn-quiet,.text-link{background:transparent;color:var(--brown);padding:10px 0}.btn-quiet:hover,.text-link:hover{color:#a47c5c}.btn-outline{background:transparent;border:1px solid #cdbba9;color:var(--brown)}.btn-outline:hover{background:#f2e8dd}.btn-small{padding:10px 14px}.hero-note{display:flex;align-items:center;gap:12px;margin-top:50px;color:var(--muted);font-size:10px}.hero-note b{color:var(--brown);font-size:11px}.note-icon{width:35px;height:35px;border:1px solid var(--tan);border-radius:50%;display:grid;place-items:center;color:var(--brown);font-size:17px}
+.hero-art{height:470px;position:relative;display:grid;place-items:center}.art-orbit{position:absolute;border:1px solid #dfcdbb;border-radius:50%;transform:rotate(-25deg)}.orbit-one{width:440px;height:340px}.orbit-two{width:370px;height:460px;transform:rotate(35deg)}.art-card{position:absolute;box-shadow:var(--shadow)}.card-front{width:260px;height:365px;object-fit:cover;background:#e7d7c7;z-index:2;padding:0;transform:rotate(4deg)}.art-topline{display:flex;justify-content:space-between;font-size:8px;letter-spacing:1.5px;color:#765743}.figure-art{height:255px;position:relative;display:flex;align-items:center;flex-direction:column;padding-top:20px}.figure-head{width:47px;height:56px;border-radius:48% 48% 45% 45%;background:#b58e70}.figure-neck{width:24px;height:22px;background:#b58e70}.figure-body{width:110px;height:120px;background:#98755e;clip-path:polygon(25% 0,75% 0,100% 35%,78% 52%,72% 100%,28% 100%,22% 52%,0 35%);border-radius:20px}.figure-leg{position:absolute;top:210px;width:30px;height:52px;background:#98755e}.figure-leg.left{margin-left:-35px;transform:rotate(2deg)}.figure-leg.right{margin-left:35px;transform:rotate(-2deg)}.art-caption{border-top:1px solid #cbb5a1;padding-top:11px}.art-caption span{display:block;font-size:7px;letter-spacing:2px;color:#8d705a}.art-caption b{font:500 17px 'Playfair Display';color:#5e4434}.card-back{width:190px;height:230px;right:4%;top:12%;background:#b3b19b;padding:25px 20px;transform:rotate(-8deg);color:#fffaf4}.card-back span{font-size:8px;letter-spacing:2px}.card-back b{display:block;font:500 25px/1.2 'Playfair Display';margin-top:35px}.card-back i{font-style:normal;font-size:30px;position:absolute;bottom:15px;right:20px}.floating-chip{position:absolute;background:#fffdf9;padding:10px 14px;box-shadow:var(--shadow);font-size:9px;letter-spacing:.8px;color:var(--brown);z-index:3}.chip-top{top:14%;left:1%}.chip-bottom{bottom:13%;right:0}
+.intro-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:20px}.intro-strip span{font-size:8px;letter-spacing:1.6px;color:var(--muted);white-space:nowrap}.intro-strip p{font:italic 16px 'Playfair Display';color:var(--brown);margin:0;text-align:center}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:75px 0 27px}.section-heading h2,.panel-heading h2,.wardrobe-toolbar h2{font:500 34px 'Playfair Display';margin:8px 0 0}.section-heading>p{max-width:330px;color:var(--muted);font-size:11px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature-card{position:relative;background:var(--paper);padding:30px 28px;min-height:250px;border:1px solid var(--line)}.feature-highlight{background:#eee4d9}.feature-number{position:absolute;right:24px;top:22px;font:italic 17px 'Playfair Display';color:#b69b82}.feature-icon{width:42px;height:42px;border:1px solid #d8c5b2;border-radius:50%;display:grid;place-items:center;font-size:22px;color:var(--brown)}.feature-card h3{font:500 22px 'Playfair Display';margin:22px 0 7px}.feature-card p{font-size:11px;color:var(--muted);max-width:270px;line-height:1.8}.text-link{font-size:10px;font-weight:700;cursor:pointer;margin-top:10px}.quote-band{margin:70px 0 80px;background:#78604d;color:#fff8ef;padding:37px 45px;display:flex;align-items:center;gap:24px}.quote-band>span:first-child{font:60px 'Playfair Display';opacity:.55}.quote-band p{font:500 22px/1.4 'Playfair Display';margin:0}.quote-band em{color:#e8cdb2}.quote-side{margin-left:auto;font-size:8px;letter-spacing:1.5px;opacity:.7}
+.page-heading{padding:70px 0 42px}.page-heading h1{font-size:56px;margin:17px 0}.page-heading p{max-width:570px;color:var(--muted);font-size:12px;line-height:1.9}.analysis-layout{display:grid;grid-template-columns:1.6fr .8fr;gap:20px;margin-bottom:55px}.form-panel,.side-panel{background:var(--paper);border:1px solid var(--line);padding:30px}.panel-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.panel-heading h2{font-size:27px}.panel-symbol{font-size:26px;color:#b38c6d}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:19px 16px}.field{display:flex;flex-direction:column;gap:7px;color:var(--deep);font-size:10px;font-weight:700}.field small{font-size:9px;color:#a18e7e;font-weight:400}.field input,.field select{width:100%;height:43px;border:1px solid #e5dbd0;background:#fcfaf6;padding:0 12px;font:12px 'DM Sans';color:var(--deep);outline:none;border-radius:2px}.field input:focus,.field select:focus{border-color:#a9896e;box-shadow:0 0 0 3px #c7a98e22}.field input::placeholder{color:#b9aa9b}.measurement-tip{display:flex;gap:10px;background:#f4eee7;padding:12px 14px;margin:22px 0;color:var(--muted)}.measurement-tip span{color:var(--brown)}.measurement-tip p{margin:0;font-size:9px;line-height:1.7}.form-actions{display:flex;gap:12px;flex-wrap:wrap}.side-panel{background:#eee5da;display:flex;flex-direction:column;justify-content:center}.side-illustration{height:180px;background:#e4d5c4;position:relative;display:grid;place-items:center;margin-bottom:25px;overflow:hidden}.mini-sun{position:absolute;right:24px;top:15px;color:#ad8b6d;font-size:30px}.mini-figure{display:flex;flex-direction:column;align-items:center;padding-top:10px}.mini-head{width:36px;height:43px;border-radius:50%;background:#b48c70}.mini-torso{width:84px;height:91px;background:#99765f;clip-path:polygon(24% 0,76% 0,100% 35%,78% 50%,70% 100%,30% 100%,22% 50%,0 35%)}.mini-legs{width:50px;height:32px;background:#99765f;clip-path:polygon(8% 0,92% 0,80% 100%,57% 100%,50% 35%,43% 100%,20% 100%)}.side-panel h3{font:500 24px 'Playfair Display';margin:9px 0}.side-panel>p{font-size:10px;color:var(--muted);line-height:1.9}.privacy-note{display:flex;gap:10px;border-top:1px solid #d9c8b7;padding-top:15px;margin-top:18px;color:var(--brown)}.privacy-note p{font-size:9px;margin:0;line-height:1.7}
+.hidden{display:none!important}.result-section{padding:15px 0 65px}.result-top{display:flex;align-items:end;justify-content:space-between;margin-bottom:20px}.result-top h2{font:500 35px 'Playfair Display';margin:7px 0}.result-status{font-size:8px;letter-spacing:1px;color:#72816b;border:1px solid #c6d0bd;padding:8px 11px}.result-card{display:grid;grid-template-columns:.85fr 1.15fr;background:var(--paper);border:1px solid var(--line)}.result-visual{padding:24px;background:#eee5da;display:flex;flex-direction:column;gap:13px}.shape-visual{min-height:280px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#f8f1e8 0,#e8d9c9 70%)}.shape-silhouette{width:145px;height:230px;background:#a47f63;clip-path:polygon(37% 0,63% 0,67% 13%,78% 19%,90% 37%,76% 44%,71% 38%,73% 58%,83% 100%,57% 100%,50% 66%,43% 100%,17% 100%,27% 58%,29% 38%,24% 44%,10% 37%,22% 19%,33% 13%);filter:drop-shadow(0 8px 8px #6b4d3820)}.visual-caption{position:absolute;bottom:12px;font-size:7px;letter-spacing:1.5px;color:#8b715c}.visual-upload{position:relative}.visual-upload label{display:block;text-align:center;padding:10px;border:1px dashed #bca58f;color:var(--brown);font-size:9px;cursor:pointer}.visual-upload input{position:absolute;width:1px;height:1px;opacity:0}.visual-upload img{width:100%;max-height:190px;object-fit:contain;background:#fff;padding:5px;margin-top:8px}.result-copy{padding:35px 38px}.result-copy h3{font:500 39px 'Playfair Display';margin:10px 0;color:#78583f}.result-copy>p{font-size:12px;color:var(--muted);line-height:1.9}.result-tags{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.result-tags span{background:#f0e7dd;color:#795b43;padding:7px 10px;font-size:8px;letter-spacing:.5px}.result-disclaimer{border-left:2px solid #c6a98e;padding:9px 13px;background:#faf6f0;color:#96816e;font-size:9px;line-height:1.7}.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0 35px}.stat-box{background:var(--paper);border:1px solid var(--line);padding:15px}.stat-box span{display:block;font-size:8px;color:var(--muted);letter-spacing:1px}.stat-box b{display:block;font:500 23px 'Playfair Display';margin-top:5px}.recommendation-preview{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:25px 28px;background:#e9dfd3}.recommendation-preview h3{font:500 24px 'Playfair Display';margin:7px 0}.recommendation-preview p{font-size:10px;color:var(--muted);margin:0}
+
+.result-recommendations{margin:34px 0 28px}.result-recommendations-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:17px}.result-recommendations-heading h3{font:500 27px 'Playfair Display';margin:7px 0}.result-recommendations-heading p{font-size:10px;color:var(--muted);margin:0}.recommendation-count{white-space:nowrap;border:1px solid #d9cabc;color:var(--brown);padding:8px 12px;font-size:8px;letter-spacing:1px}.result-outfit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.result-outfit-card{display:block;width:100%;min-width:0;padding:0;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:transform .22s,box-shadow .22s}.result-outfit-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.result-outfit-card:focus-visible{outline:3px solid #c7a98e88;outline-offset:3px}.result-outfit-image{height:235px;position:relative;background:#eee5da;overflow:hidden}.result-outfit-image img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;transform:translateY(12px) scale(1.03);transform-origin:center top}.result-outfit-image>span{position:absolute;left:11px;top:11px;background:#fffdf0ef;color:var(--brown);padding:6px 9px;font-size:8px;letter-spacing:1px}.result-outfit-copy{padding:16px}.result-outfit-copy small{font-size:8px;letter-spacing:1px;color:#a18468}.result-outfit-copy h4{font:500 19px 'Playfair Display';margin:6px 0}.result-outfit-copy p{font-size:10px;line-height:1.7;color:var(--muted);min-height:50px;margin:0}.result-outfit-link{display:block;margin-top:12px;padding:9px 0 0;border-top:1px solid var(--line);background:none;color:var(--brown);font:700 9px 'DM Sans'}.result-outfit-card:hover .result-outfit-link{color:#a47c5c}
+.wardrobe-toolbar{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:22px}.wardrobe-toolbar h2{font-size:27px}.filter-row{display:flex;gap:8px;flex-wrap:wrap;padding:22px 0}.filter-chip{background:transparent;border:1px solid #d9cabc;color:var(--muted);padding:9px 14px;border-radius:30px;font:600 9px 'DM Sans';cursor:pointer}.filter-chip.active,.filter-chip:hover{background:var(--brown);border-color:var(--brown);color:#fff8ef}.outfit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.outfit-card{background:var(--paper);border:1px solid var(--line);overflow:hidden}.outfit-art{height:210px;display:grid;place-items:center;position:relative;background:#e9ddd0}.outfit-art.tone-2{background:#e4e4d8}.outfit-art.tone-3{background:#e8d4c9}.outfit-art.tone-4{background:#ded9ce}.outfit-art.tone-5{background:#eee4d8}.outfit-art.tone-6{background:#dcded3}.outfit-shape{width:125px;height:160px;position:relative}.garment-top{position:absolute;top:9px;left:28px;width:70px;height:73px;background:#80624d;clip-path:polygon(20% 0,80% 0,100% 32%,78% 47%,72% 100%,28% 100%,22% 47%,0 32%)}.garment-bottom{position:absolute;top:78px;left:30px;width:66px;height:80px;background:#b38f71;clip-path:polygon(8% 0,92% 0,100% 100%,57% 100%,50% 25%,43% 100%,0 100%)}.garment-onepiece{position:absolute;top:8px;left:27px;width:72px;height:148px;background:#8a7964;clip-path:polygon(20% 0,80% 0,100% 28%,78% 42%,96% 100%,4% 100%,22% 42%,0 28%)}.garment-layer{position:absolute;top:8px;left:18px;width:90px;height:130px;border:10px solid #96765e;border-top-width:12px;clip-path:polygon(20% 0,80% 0,100% 25%,78% 42%,70% 100%,30% 100%,22% 42%,0 25%)}.art-label{position:absolute;top:12px;left:14px;font-size:7px;letter-spacing:1.5px;color:#806c5b}.outfit-info{padding:18px}.outfit-meta{font-size:8px;letter-spacing:1.4px;color:#a18468}.outfit-info h3{font:500 20px 'Playfair Display';margin:7px 0}.outfit-info p{font-size:10px;color:var(--muted);line-height:1.8;margin:0}.outfit-tip{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:9px;color:var(--brown)}.style-note{display:flex;gap:13px;background:#eee5da;padding:18px 20px;margin:35px 0 70px;color:var(--brown)}.style-note span{font-size:20px}.style-note p{font-size:10px;margin:0;line-height:1.8}
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.guide-card{background:var(--paper);border:1px solid var(--line);padding:24px;min-height:205px}.guide-card>span{font:italic 18px 'Playfair Display';color:#b18e70}.guide-card h3{font:500 22px 'Playfair Display';margin:12px 0 7px}.guide-card p,.guide-card small{font-size:10px;color:var(--muted);line-height:1.8}.guide-card small{display:block;border-top:1px solid var(--line);padding-top:10px;margin-top:12px}.method-card{display:grid;grid-template-columns:1fr 1fr;gap:35px;background:#e9dfd3;padding:35px;margin:30px 0 75px}.method-card h2{font:500 29px/1.3 'Playfair Display';margin:10px 0}.method-card p{font-size:11px;color:#806e5e;line-height:1.9;margin:0 0 12px}
+.footer{border-top:1px solid var(--line);padding:28px 0 35px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:9px}.footer-brand{font-size:20px}.footer-brand .brand-mark{width:32px;height:32px;font-size:19px}.footer-brand small{font-size:6px}.mobile-nav{display:none}.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);background:#4b382d;color:#fff8ef;padding:12px 18px;font-size:11px;opacity:0;pointer-events:none;transition:.25s;z-index:20;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.app-shell{padding:0 4%}.hero{gap:20px}.hero-art{transform:scale(.9)}.analysis-layout{grid-template-columns:1fr}.side-panel{display:grid;grid-template-columns:150px 1fr;column-gap:20px}.side-illustration{grid-row:span 3;height:180px;margin:0}.privacy-note{grid-column:2}.outfit-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){body{padding-bottom:65px}.app-shell{padding:0 5%}.topbar{height:72px}.desktop-nav{display:none}.menu-toggle{display:block}.hero{grid-template-columns:1fr;padding:50px 0 35px;gap:0}.hero h1,.page-heading h1{font-size:46px}.hero-art{height:370px;transform:scale(.82);margin:-5px -25px}.hero-note{margin-top:30px}.intro-strip{align-items:flex-start;flex-direction:column;gap:8px}.intro-strip p{text-align:left;font-size:15px}.section-heading{display:block;margin:50px 0 20px}.section-heading>p{margin-top:10px}.feature-grid{grid-template-columns:1fr}.feature-card{min-height:210px}.quote-band{margin:45px 0;padding:25px 20px;gap:12px}.quote-band p{font-size:17px}.quote-side{display:none}.page-heading{padding:48px 0 25px}.page-heading h1{margin:12px 0}.form-panel,.side-panel{padding:21px}.field-grid{grid-template-columns:1fr}.side-panel{display:block}.side-illustration{height:140px;margin-bottom:18px}.result-top{align-items:flex-start;gap:10px;flex-direction:column}.result-card{grid-template-columns:1fr}.result-visual{padding:15px}.shape-visual{min-height:230px}.result-copy{padding:25px 22px}.result-copy h3{font-size:33px}.stats-row{grid-template-columns:repeat(2,1fr)}.recommendation-preview{align-items:flex-start;flex-direction:column;padding:22px}.wardrobe-toolbar{align-items:flex-start;gap:15px;flex-direction:column}.outfit-grid{grid-template-columns:1fr 1fr;gap:9px}.outfit-art{height:155px}.outfit-shape{transform:scale(.78)}.outfit-info{padding:13px}.outfit-info h3{font-size:17px}.guide-grid{grid-template-columns:1fr}.guide-card{min-height:0}.method-card{grid-template-columns:1fr;padding:25px;gap:12px}.footer{flex-wrap:wrap;gap:10px;padding-bottom:20px}.footer>p{display:none}.mobile-nav{display:flex;position:fixed;z-index:15;bottom:0;left:0;right:0;background:#fffdf9;border-top:1px solid var(--line);justify-content:space-around;padding:8px 5px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -6px 20px #4b382d0c}.mobile-nav button{border:0;background:none;color:#a28d7a;font-size:17px;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:55px}.mobile-nav button small{font:600 8px 'DM Sans'}.mobile-nav button.active{color:var(--brown)}.toast{bottom:78px;max-width:90%;white-space:normal;text-align:center}.form-actions .btn{flex:1}.art-card.card-front{width:240px}.orbit-one{width:380px}.orbit-two{width:330px}}
+@media(max-width:380px){.outfit-grid{grid-template-columns:1fr}.outfit-art{height:190px}.hero-art{transform:scale(.72);margin:-25px -40px}}
+
+.result-header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}.result-header-actions .btn{white-space:nowrap}
+
+/* Siluet hasil analisis dibedakan secara halus untuk tiap kategori. */
+.shape-visual[data-shape="pear"] .shape-silhouette{clip-path:polygon(39% 0,61% 0,65% 13%,76% 18%,85% 30%,78% 42%,72% 45%,77% 62%,94% 100%,57% 100%,50% 68%,43% 100%,6% 100%,23% 62%,28% 45%,22% 42%,15% 30%,24% 18%,35% 13%)}
+.shape-visual[data-shape="hourglass"] .shape-silhouette{clip-path:polygon(38% 0,62% 0,66% 13%,78% 19%,86% 34%,76% 45%,66% 42%,70% 52%,86% 100%,57% 100%,50% 67%,43% 100%,14% 100%,30% 52%,34% 42%,24% 45%,14% 34%,22% 19%,34% 13%)}
+.shape-visual[data-shape="inverted"] .shape-silhouette{clip-path:polygon(29% 0,71% 0,78% 13%,94% 25%,83% 39%,73% 34%,70% 55%,80% 100%,57% 100%,50% 66%,43% 100%,20% 100%,30% 55%,27% 34%,17% 39%,6% 25%,22% 13%)}
+.shape-visual[data-shape="rectangle"] .shape-silhouette{clip-path:polygon(36% 0,64% 0,68% 13%,77% 20%,84% 36%,76% 43%,70% 39%,72% 57%,83% 100%,57% 100%,50% 67%,43% 100%,17% 100%,28% 57%,30% 39%,24% 43%,16% 36%,23% 20%,32% 13%)}
+.shape-visual[data-shape="balanced"] .shape-silhouette{clip-path:polygon(35% 0,65% 0,68% 13%,78% 20%,88% 35%,77% 44%,70% 40%,72% 58%,84% 100%,57% 100%,50% 67%,43% 100%,16% 100%,28% 58%,30% 40%,23% 44%,12% 35%,22% 20%,32% 13%)}
+.shape-visual{height:390px;min-height:0}
+.shape-result-image{width:80%;height:80%;object-fit:contain}
+@media(max-width:650px){.shape-visual{height:340px}}
+.side-illustration img{width:100%;height:100%;object-fit:contain;display:block}
+.outfit-art.has-reference-image{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:32px}
+.outfit-reference-image{width:auto;height:calc(120% - 45px);max-width:100%;object-fit:contain}
+
+  
+    .analysis-method-switch{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 8px}.method-choice{border:1px solid var(--line,#d8c9b8);background:transparent;color:inherit;padding:13px 20px;border-radius:999px;cursor:pointer;font:inherit}.method-choice.active{background:var(--ink,#403329);color:#fff;border-color:var(--ink,#403329)}.method-hint{font-size:.9rem;opacity:.75;margin:0 0 22px}.quiz-panel{max-width:920px;margin:28px auto;padding:clamp(22px,4vw,42px);background:var(--panel,#f7f1e9);border:1px solid var(--line,#e3d8ca);border-radius:18px}.quiz-intro{line-height:1.7;max-width:720px}.quiz-question{border:1px solid var(--line,#ded2c5);border-radius:14px;padding:18px 20px;margin:18px 0}.quiz-question legend{font-weight:600;padding:0 6px;line-height:1.5}.quiz-question label{display:flex;align-items:flex-start;gap:10px;padding:9px 2px;cursor:pointer;line-height:1.5}.quiz-question input{margin-top:5px;accent-color:#8b6e55}.quiz-panel .field{display:block;margin:18px 0}.quiz-panel .field input,.quiz-panel .field select{display:block;width:100%;max-width:420px;margin-top:8px;padding:12px;border:1px solid var(--line,#ded2c5);border-radius:10px;background:#fff;color:#3f352d}.hidden{display:none!important}
+
+
+/* Outfit set gallery and clickable detail modal */
+.set-intro{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0 0;color:var(--muted)}
+.set-intro p{font-size:11px;margin:0;max-width:430px}
+.outfit-set-grid{align-items:stretch}
+.outfit-set-card{display:flex;flex-direction:column;width:100%;height:100%;padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer;transition:transform .22s,box-shadow .22s}
+.outfit-set-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.outfit-set-cover{height:290px;overflow:hidden;background:#eee5da}
+.outfit-cover-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .35s}
+.outfit-set-card:hover .outfit-cover-image{transform:scale(1.035)}
+.outfit-set-card[data-open-outfit="feminine-charm"] .outfit-cover-image{top:-10px;height:calc(100% + 10px)}
+.outfit-open-hint{position:absolute;right:13px;bottom:13px;background:#fffdf9eF;color:var(--brown);padding:8px 11px;font-size:8px;letter-spacing:1.4px}
+.outfit-set-card .outfit-info{display:flex;flex:1;flex-direction:column;background:var(--paper)}
+.outfit-set-card .outfit-tip{margin-top:auto}
+.outfit-modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px}
+.outfit-modal-backdrop{position:absolute;inset:0;background:rgba(50,37,29,.58);backdrop-filter:blur(3px)}
+.outfit-modal-panel{position:relative;z-index:1;width:min(900px,100%);max-height:90vh;overflow:auto;background:var(--cream);padding:34px;box-shadow:0 25px 80px #24170f45}
+.outfit-modal-close{position:sticky;top:0;float:right;border:1px solid var(--line);background:var(--paper);color:var(--brown);width:36px;height:36px;font-size:24px;line-height:1;cursor:pointer;z-index:2}
+.outfit-detail-heading{padding-right:48px}
+.outfit-detail-heading h2{font:500 38px 'Playfair Display';margin:8px 0;color:var(--deep)}
+.outfit-detail-heading p{font-size:11px;color:var(--muted);margin:0 0 20px}
+.outfit-detail-cover{height:260px;background:#e9dfd3;display:flex;justify-content:center;overflow:hidden;margin-bottom:22px}
+.outfit-detail-cover img{height:100%;max-width:100%;object-fit:contain}
+.outfit-detail-items{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.outfit-piece{background:var(--paper);border:1px solid var(--line)}
+.outfit-piece-image{height:210px;background:#eee5da;display:grid;place-items:center;overflow:hidden}
+.outfit-piece-image img{width:100%;height:100%;object-fit:contain}
+.outfit-piece-copy{padding:13px 15px}
+.outfit-piece-copy span,.outfit-detail-note span{font-size:8px;letter-spacing:1.6px;color:#a18468;font-weight:700}
+.outfit-piece-copy h3{font:500 18px 'Playfair Display';margin:4px 0 0}
+.outfit-detail-note{margin-top:18px;background:#eee5da;padding:17px 19px}
+.outfit-detail-note p{font-size:10px;color:var(--muted);line-height:1.8;margin:6px 0 0}
+body.modal-open{overflow:hidden}
+@media(max-width:650px){
+ .set-intro{display:block}.set-intro p{margin-top:8px}
+ .outfit-set-cover{height:190px}
+ .outfit-modal{padding:10px}
+ .outfit-modal-panel{padding:20px 16px;max-height:94vh}
+ .outfit-detail-heading h2{font-size:30px}
+ .outfit-detail-cover{height:190px}
+ .outfit-detail-items{grid-template-columns:1fr 1fr;gap:9px}
+ .outfit-piece-image{height:150px}
+ .outfit-piece:last-child:nth-child(odd){grid-column:1/-1}
+}
+.outfit-shape-tag{display:inline-block;margin-top:8px;padding:6px 9px;background:#eee4d9;color:#80624f;font-size:8px;letter-spacing:1.1px;font-weight:700}
+.outfit-set-cover.outfit-portrait-cover{height:330px}
+.outfit-portrait-cover .outfit-cover-image{object-fit:cover;object-position:center top;background:#eee5da}
+.outfit-detail-cover.outfit-detail-portrait{height:auto;min-height:0;background:#eee5da}
+.outfit-detail-portrait img{display:block;width:auto;height:auto;max-width:100%;max-height:min(70vh,720px);object-fit:contain}
+.outfit-detail-landscape{width:100%;aspect-ratio:3 / 2;background:#eee5da;margin-bottom:22px;overflow:hidden}
+.outfit-detail-landscape img{display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:650px){
+ .outfit-set-cover.outfit-portrait-cover{height:290px}
+ .outfit-detail-portrait img{max-height:62vh}
+}
+@media(max-width:900px){.result-outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.result-outfit-grid{grid-template-columns:1fr}.result-outfit-image{height:270px}.result-recommendations-heading{align-items:start;flex-direction:column}.recommendation-preview{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" data-home><span class="brand-mark">f.</span><span>BodyRaa<span class="brand-dot">.</span><small>BODY & STYLE STUDIO</small></span></a>
+      <nav class="desktop-nav" aria-label="Navigasi utama">
+        <button class="nav-link active" data-page="home">Home</button>
+        <button class="nav-link" data-page="analysis">Analisis</button>
+        <button class="nav-link" data-page="wardrobe">Style guide</button>
+        <button class="nav-link" data-page="about">bodyshape</button>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+    </header>
+
+    <main>
+      <section class="page active" id="page-home">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow"><i></i> YOUR PERSONAL STYLE SPACE</span>
+            <h1>Kenali bentukmu.<br><em>Temukan gayamu.</em></h1>
+            <p class="hero-lead">Ruang kecil untuk mengenali proporsi tubuh dan menemukan inspirasi outfit yang terasa nyaman, percaya diri, dan tetap jadi diri sendiri.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-page="analysis">Mulai analisis <span>↗</span></button>
+              <button class="btn btn-quiet" data-page="wardrobe">Jelajahi style guide</button>
+            </div>
+            <div class="hero-note"><span class="note-icon">✳</span><span><b>Style has no rules.</b><br>Gunakan hasilnya sebagai inspirasi, bukan batasan.</span></div>
+          </div>
+          <div class="hero-art">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-card card-back"><span>STYLE NOTES</span><b>Find what<br>feels like you.</b><i>✳</i></div>
+            <img class="art-card card-front" src="image/ilustrasi.png" alt="Ilustrasi bentuk tubuh" />
+            <div class="floating-chip chip-top">✦ A little more you</div><div class="floating-chip chip-bottom">01 — DISCOVER</div>
+          </div>
+        </div>
+        <div class="intro-strip"><span>01 / DISCOVER</span><p>Setiap tubuh punya proporsi yang berbeda. Tidak ada bentuk yang lebih baik dari yang lain.</p><span>EST. FOR EVERY BODY</span></div>
+        <div class="section-heading"><div><span class="eyebrow">YOUR JOURNEY</span><h2>Mulai dari sini.</h2></div><p>Beberapa langkah sederhana untuk menemukan referensi gaya yang lebih personal.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card"><span class="feature-number">01</span><div class="feature-icon">⌁</div><h3>Body shape check</h3><p>Masukkan ukuran yang kamu punya untuk mendapatkan perkiraan kategori proporsi tubuh.</p><button class="text-link" data-page="analysis">Mulai sekarang ↗</button></article>
+          <article class="feature-card feature-highlight"><span class="feature-number">02</span><div class="feature-icon">✳</div><h3>Outfit inspiration</h3><p>Lihat ide padu padan yang bisa kamu adaptasi sesuai selera, aktivitas, dan kenyamanan.</p><button class="text-link" data-page="wardrobe">Lihat inspirasi ↗</button></article>
+          <article class="feature-card"><span class="feature-number">03</span><div class="feature-icon">▤</div><h3>Your style profile</h3><p>Simpan hasil analisis di perangkat ini dan kembali kapan pun tanpa kehilangan progres.</p><button class="text-link" data-page="analysis">Buat profil ↗</button></article>
+        </div>
+        <div class="quote-band"><span>“</span><p>Clothes are a way to express yourself.<br><em>Not a way to change yourself.</em></p><span class="quote-side">BodyRaa JOURNAL — 001</span></div>
+      </section>
+
+      <section class="page" id="page-analysis">
+        <div class="page-heading"><span class="eyebrow">YOUR BODY PROFILE / 01</span><h1>Let's get to know<br><em>your proportions.</em></h1><p>Isi ukuran yang kamu ketahui. Hasilnya berupa perkiraan kategori proporsi, bukan penilaian tubuh atau standar ideal.</p></div>
+        <div class="analysis-method-switch" role="group" aria-label="Pilih metode analisis">
+          <button type="button" class="method-choice active" data-method="measure">Metode 1 · Pengukuran</button>
+          <button type="button" class="method-choice" data-method="quiz">Metode 2 · Kuis sederhana</button>
+        </div>
+        <p class="method-hint">Pilih cara yang paling nyaman. Keduanya hanya memberi perkiraan untuk eksplorasi styling.</p>
+        <div class="analysis-layout" id="measurementMethod">
+          <div class="form-panel">
+            <div class="panel-heading"><div><span class="step-label">STEP 01 — YOUR DETAILS</span><h2>Data pengukuran</h2></div><span class="panel-symbol">✳</span></div>
+            <form id="measurementForm">
+              <div class="field-grid">
+                <label class="field"><span>Tinggi badan <small>(cm)</small></span><input id="height" type="number" min="100" max="230" step="0.1" placeholder="Contoh: 165" /></label>
+                <label class="field"><span>Lebar bahu <small>(cm, opsional)</small></span><input id="shoulders" type="number" min="10" max="100" step="0.1" placeholder="Catatan opsional" /></label>
+                <label class="field"><span>Lingkar dada <small>(cm)</small></span><input id="bust" type="number" min="20" max="200" step="0.1" placeholder="Contoh: 88" /></label>
+                <label class="field"><span>Lingkar pinggang <small>(cm)</small></span><input id="waist" type="number" min="20" max="200" step="0.1" placeholder="Contoh: 70" /></label>
+                <label class="field"><span>Lingkar pinggul <small>(cm)</small></span><input id="hips" type="number" min="20" max="220" step="0.1" placeholder="Contoh: 96" /></label>
+              </div>
+              <div class="measurement-tip"><span>ⓘ</span><p>Tips: gunakan pita ukur dengan posisi rileks dan satuan cm. Lebar bahu hanya dicatat sebagai informasi tambahan karena berupa ukuran lebar, bukan lingkar. Sistem membandingkan dada dan pinggul terlebih dahulu: selisih relatif lebih dari 5% mengarah ke Pear atau Inverted Triangle. Jika selisih maksimal 5%, rasio pinggang terhadap rata-rata dada dan pinggul digunakan: ≤0,75 Hourglass; >0,75 hingga <0,82 Balanced; ≥0,82 Rectangle. Batas ini adalah aturan perkiraan BodyRaa, bukan standar universal.</p></div>
+              <div class="form-actions"><button type="submit" class="btn btn-primary">Analisis bentuk tubuh <span>↗</span></button><button type="button" class="btn btn-outline" id="clearForm">Bersihkan form</button></div>
+            </form>
+          </div>
+          <aside class="side-panel">
+            <div class="side-illustration"><img src="image/style.jpeg" alt="Ilustrasi gaya berpakaian" /></div>
+            <span class="step-label">A NOTE BEFORE YOU START</span><h3>Ukuran bukan identitas.</h3><p>Hasil bisa dipengaruhi cara mengukur dan perbedaan proporsi alami. Kamu bebas memakai, mengabaikan, atau mengulang hasil ini.</p>
+            <div class="privacy-note"><span>⌑</span><p>Data tersimpan lokal di browser perangkat ini. Tidak dikirim ke server.</p></div>
+          </aside>
+        </div>
+        <section class="quiz-panel hidden" id="quizMethod">
+          <div class="panel-heading"><div><span class="step-label">STEP 01 — QUICK STYLE QUIZ</span><h2>Jawab berdasarkan pengalaman berpakaian</h2></div><span class="panel-symbol">✳</span></div>
+          <p class="quiz-intro">Tidak perlu mengukur tubuh atau memilih gambar. Pilih jawaban yang paling sering kamu alami. Hasil kuis bersifat perkiraan dan bisa saja tidak sepenuhnya cocok.</p>
+          <form id="shapeQuizForm">
+            <fieldset class="quiz-question"><legend>1. Saat memakai atasan, bagian mana yang biasanya terasa lebih pas atau lebih penuh?</legend>
+              <label><input type="radio" name="q1" value="upper" required> Area bahu atau dada</label><label><input type="radio" name="q1" value="lower"> Area pinggul</label><label><input type="radio" name="q1" value="same"> Kurang lebih sama</label><label><input type="radio" name="q1" value="unsure"> Tidak yakin</label>
+            </fieldset>
+            <fieldset class="quiz-question"><legend>2. Bagaimana perbandingan atasan dan bawahan yang biasanya kamu pilih?</legend>
+              <label><input type="radio" name="q2" value="upper" required> Ukuran atasan sering terasa lebih besar</label><label><input type="radio" name="q2" value="lower"> Ukuran bawahan sering terasa lebih besar</label><label><input type="radio" name="q2" value="same"> Biasanya seimbang</label><label><input type="radio" name="q2" value="unsure"> Tidak ada pola yang jelas</label>
+            </fieldset>
+            <fieldset class="quiz-question"><legend>3. Saat memilih pakaian terusan atau setelan, potongan mana yang paling sering terasa pas?</legend>
+              <label><input type="radio" name="q3" value="waist" required> Potongan yang memberi ruang berbeda di area pinggang</label><label><input type="radio" name="q3" value="straight"> Potongan lurus dari atas ke bawah</label><label><input type="radio" name="q3" value="balanced"> Beragam potongan terasa sama-sama pas</label><label><input type="radio" name="q3" value="unsure"> Belum tahu</label>
+            </fieldset>
+            <fieldset class="quiz-question"><legend>4. Secara umum, bagaimana pakaian yang kamu coba terasa di bagian atas dan bawah?</legend>
+              <label><input type="radio" name="q4" value="upper" required> Bagian atas lebih sering terasa ketat</label><label><input type="radio" name="q4" value="lower"> Bagian bawah lebih sering terasa ketat</label><label><input type="radio" name="q4" value="same"> Keduanya relatif seimbang</label><label><input type="radio" name="q4" value="unsure"> Bergantung model pakaian</label>
+            </fieldset>
+            <fieldset class="quiz-question"><legend>5. Pilihan mana yang paling menggambarkan pengalamanmu?</legend>
+              <label><input type="radio" name="q5" value="curved" required> Aku sering memilih pakaian dengan variasi potongan di area pinggang</label><label><input type="radio" name="q5" value="straight"> Aku sering nyaman dengan siluet sederhana/lurus</label><label><input type="radio" name="q5" value="mix"> Aku suka mencoba banyak siluet berbeda</label><label><input type="radio" name="q5" value="unsure"> Belum bisa menentukan</label>
+            </fieldset>
+            <div class="measurement-tip"><span>ⓘ</span><p>Kuis ini bukan pengukuran ilmiah dan tidak menentukan bentuk tubuh secara pasti. Jika jawabanmu beragam, hasil dapat ditampilkan sebagai kategori perkiraan yang paling mendekati.</p></div>
+            <div class="form-actions"><button type="submit" class="btn btn-primary">Lihat hasil kuis <span>↗</span></button><button type="reset" class="btn btn-outline">Ulangi jawaban</button></div>
+          </form>
+        </section>
+        <section class="result-section hidden" id="resultSection">
+          <div class="result-top"><div><span class="eyebrow">YOUR PERSONAL RESULT</span><h2>Here is your shape<span class="brand-dot">.</span></h2></div><div class="result-header-actions"><span class="result-status">✓ ANALISIS SELESAI</span><button type="button" class="btn btn-outline btn-small" id="resetProfile">Reset hasil & data</button></div></div>
+          <div class="result-card">
+            <div class="result-visual">
+              <div class="shape-visual" id="shapeVisual"><img class="shape-result-image" id="shapeResultImage" alt="" /></div>
+              <div class="visual-upload"><label for="shapeImage">＋ Tambahkan visual sendiri</label><input id="shapeImage" type="file" accept="image/*" /><img id="customShapeImage" alt="Visual bentuk tubuh pilihan pengguna" class="hidden" /></div>
+            </div>
+            <div class="result-copy"><span class="step-label">YOUR ESTIMATED BODY SHAPE</span><h3 id="shapeName">—</h3><p id="shapeDescription"></p><div class="result-tags" id="resultTags"></div><div class="result-disclaimer">Kategori ini hanya perkiraan berdasarkan angka yang dimasukkan. Perbedaan kecil dan metode pengukuran dapat mengubah hasil.</div></div>
+          </div>
+          <div class="stats-row" id="statsRow"></div>
+          <section class="result-recommendations" aria-live="polite">
+            <div class="result-recommendations-heading"><div><span class="step-label">OUTFIT KHUSUS HASIL ANALISIS</span><h3>3 Rekomendasi Outfit untukmu</h3><p>Hanya tiga outfit dari kategori body shape hasil analisismu yang ditampilkan di sini.</p></div><span class="recommendation-count">3 OUTFIT</span></div>
+            <div class="result-outfit-grid" id="resultOutfitGrid"></div>
+          </section>
+          <div class="recommendation-preview">
+            <div><span class="step-label">EXPLORE THE FULL COLLECTION</span><h3>Ingin melihat semua inspirasi?</h3><p>Room Style Guide menampilkan seluruh 15 outfit dari kelima kategori body shape.</p></div>
+            <button class="btn btn-primary" data-page="wardrobe">Buka Room Style Guide ↗</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="page" id="page-wardrobe">
+        <div class="page-heading"><span class="eyebrow">THE STYLE EDIT / 02</span><h1>Wear what feels<br><em>like you.</em></h1><p>Ide outfit berdasarkan kategori proporsi dan preferensi styling. Ambil yang kamu suka, mix, match, dan buat versimu sendiri.</p></div>
+        <div class="wardrobe-toolbar"><div><span class="step-label">YOUR STYLE PROFILE</span><h2 id="wardrobeProfile">Belum ada hasil analisis</h2></div><button class="btn btn-outline btn-small" data-page="analysis">Ubah pengukuran</button></div>
+        <div class="set-intro"><span class="step-label">CURATED OUTFIT SETS</span><p>Pilih satu set untuk melihat foto outfit utama dan detail item yang melengkapinya.</p></div>
+        <div class="filter-row" id="filterRow"><button class="filter-chip active" data-filter="all">Semua style</button></div>
+        <div id="outfitGrid" class="outfit-grid outfit-set-grid"></div>
+        <div class="style-note"><span>✳</span><p><b>Mix, match, and make it yours.</b> Setiap foto adalah inspirasi. Kamu bisa mengganti atasan, bawahan, atau outer sesuai selera dan kenyamananmu.</p></div>
+      </section>
+
+      <section class="page" id="page-about">
+        <div class="page-heading"><span class="eyebrow">A LITTLE GUIDE / 03</span><h1>Good to know<br><em>before you style.</em></h1><p>Kenali cara kerja fitur dan arti setiap kategori secara sederhana.</p></div>
+        <div class="guide-grid">
+          <article class="guide-card"><span>01</span><h3>Pear shape</h3><p>Area pinggul cenderung lebih lebar dibanding area dada/bahu.</p><small>Ide: coba atasan bertekstur, kemeja, atau bawahan dengan potongan yang kamu sukai.</small></article>
+          <article class="guide-card"><span>02</span><h3>Hourglass</h3><p>Ukuran dada dan pinggul relatif seimbang dengan pinggang yang lebih kecil.</p><small>Ide: eksplorasi atasan fitted, wrap top, atau setelan yang mengikuti preferensimu.</small></article>
+          <article class="guide-card"><span>03</span><h3>Inverted triangle</h3><p>Area bahu/dada cenderung lebih lebar dibanding area pinggul.</p><small>Ide: coba bawahan berpotongan lurus, wide-leg, atau detail yang kamu suka.</small></article>
+          <article class="guide-card"><span>04</span><h3>Rectangle</h3><p>Ukuran dada, pinggang, dan pinggul relatif berdekatan.</p><small>Ide: layering, outerwear, atau permainan tekstur bisa jadi opsi menarik.</small></article>
+          <article class="guide-card"><span>05</span><h3>Balanced</h3><p>Area atas dan bawah relatif seimbang, tanpa satu area yang sangat dominan.</p><small>Ide: banyak potongan bisa dieksplorasi, dari setelan simpel sampai layering.</small></article>
+        </div>
+        <div class="method-card"><div><span class="eyebrow">HOW IT WORKS</span><h2>Simple measurements.<br><em>Thoughtful suggestions.</em></h2></div><div><p>BodyRaa membandingkan lingkar dada dan pinggul terlebih dahulu. Jika selisih relatifnya lebih dari 5%, hasilnya Pear (pinggul lebih besar) atau Inverted Triangle (dada lebih besar). Jika selisihnya maksimal 5%, sistem menghitung rasio pinggang terhadap rata-rata dada dan pinggul: ≤0,75 diperkirakan Hourglass; >0,75 sampai <0,82 Balanced; dan ≥0,82 Rectangle. Lebar bahu hanya menjadi informasi tambahan karena tidak sebanding langsung dengan ukuran lingkar.</p><p>Ambang tersebut merupakan aturan praktis yang dipakai website untuk memberi perkiraan, bukan standar ilmiah universal. Hasil bukan diagnosis, bukan ukuran kesehatan, dan tidak menentukan outfit yang “boleh” kamu pakai.</p><p>Jika hasil terasa kurang sesuai, periksa kembali cara pengukuran atau pilih kategori yang paling terasa cocok untuk eksplorasi style.</p></div></div>
+      </section>
+    </main>
+
+    <footer class="footer"><a class="brand footer-brand" href="#" data-home><span class="brand-mark">f.</span><span>BodyRaa<span class="brand-dot">.</span><small>BODY & STYLE STUDIO</small></span></a><p>Made for every body, every style.</p><span>© 2026 BodyRaa</span></footer>
+    <div class="mobile-nav" id="mobileNav"><button class="active" data-page="home">⌂<small>Home</small></button><button data-page="analysis">⌁<small>Analisis</small></button><button data-page="wardrobe">✳<small>Style</small></button><button data-page="about">ⓘ<small>Panduan</small></button></div>
+  </div>
+  <div class="outfit-modal hidden" id="outfitDetailModal" role="dialog" aria-modal="true" aria-labelledby="outfitDetailTitle">
+    <div class="outfit-modal-backdrop" data-close-outfit></div>
+    <section class="outfit-modal-panel">
+      <button class="outfit-modal-close" type="button" data-close-outfit aria-label="Tutup detail">×</button>
+      <div id="outfitDetailContent"></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script>/* BodyRaa — Body & Style
+   Semua interaksi utama berada di file ini. Data profil disimpan lokal di browser. */
+(() => {
+  'use strict';
+
+  const STORAGE_KEY = 'BodyRaa-profile-v2';
+  const $ = (id) => document.getElementById(id);
+  let profile = null;
+  let currentFilter = 'all';
+  let toastTimer = null;
+
+  // Katalog outfit set: ganti path gambar di sini saat menambahkan foto milikmu.
+  // Setiap set memiliki foto utama dan detail item terpisah.
+  const outfitSets = [
+    {
+      id: 'soft-casual',
+      category: 'casual',
+      shape: 'Pear Shape',
+      title: 'Soft Casual Set',
+      subtitle: 'CASUAL · EVERYDAY',
+      cover: 'image/pear_outfit1_model.jpg',
+      detailImage: 'image/pear_outfit1_model.jpg',
+      itemsImage: 'image/pear_outfit1_landscape.png',
+      description: 'Inspirasi outfit kasual dengan atasan hitam, celana ivory, hijab beige taupe, dan aksesori senada.',
+      note: 'Padukan atasan hitam dengan celana ivory dan hijab beige taupe. Tas hitam dan sepatu off-white melengkapi tampilan.',
+      items: [
+        { label: 'Hijab', name: 'Beige taupe' },
+        { label: 'Atasan', name: 'Hitam pekat' },
+        { label: 'Bawahan', name: 'Celana ivory cream' },
+        { label: 'Tas', name: 'Jet black' },
+        { label: 'Sepatu', name: 'Off-white cream' }
+      ]
+    },
+    {
+      id: 'feminine-charm',
+      category: 'feminine',
+      shape: 'Pear Shape',
+      title: 'Feminine Charm',
+      subtitle: 'FEMININE · STYLE 02',
+      cover: 'image/feminim.png',
+      detailImage: 'image/feminim.png',
+      itemsImage: 'image/outfit_feminim.png',
+      itemsImageAlt: 'Detail item Feminine Charm: hijab beige taupe, blus burgundy, rok krem, tas ivory, dan sepatu cream beige',
+      description: 'Tampilan feminin dengan blus burgundy berlengan puff, rok plisket warna krem, dan hijab beige taupe.',
+      note: 'Jadikan blus burgundy sebagai aksen warna, lalu padukan dengan rok krem dan hijab beige taupe. Tas ivory dan sepatu cream beige menjaga tampilan tetap lembut dan serasi.',
+      items: [
+        { label: 'Hijab', name: 'Beige taupe' },
+        { label: 'Atasan', name: 'Blus burgundy berlengan puff' },
+        { label: 'Bawahan', name: 'Rok plisket krem' },
+        { label: 'Tas', name: 'Ivory cream' },
+        { label: 'Sepatu', name: 'Cream beige' }
+      ]
+    },
+    {
+      id: 'everyday-office',
+      category: 'office',
+      shape: 'Pear Shape',
+      title: 'Smart Casual Set',
+      subtitle: 'OFFICE · SMART CASUAL',
+      cover: 'image/Fashion_Portrait.png',
+      detailImage: 'image/Fashion_Portrait.png',
+      itemsImage: 'image/Smart_Casual.png',
+      itemsImageAlt: 'Detail outfit smart casual: hijab hitam, blus biru muda, celana hitam wide-leg, tas hitam, dan sepatu krem ivory',
+      description: 'Paduan blus biru muda berlengan puff, celana hitam wide-leg, dan hijab hitam untuk tampilan smart casual yang rapi.',
+      note: 'Padukan blus biru muda dengan celana hitam wide-leg dan hijab hitam. Tas hitam serta sepatu krem melengkapi tampilan untuk ke kantor atau agenda semi-formal.',
+      items: [
+        { label: 'Hijab', name: 'Hitam pekat' },
+        { label: 'Atasan', name: 'Blus biru muda' },
+        { label: 'Bawahan', name: 'Celana hitam wide-leg' },
+        { label: 'Tas', name: 'Hitam' },
+        { label: 'Sepatu', name: 'Krem ivory' }
+      ]
+    },
+    {
+      id: 'elegant-layer',
+      category: 'elegant',
+      shape: 'Inverted Triangle',
+      title: 'DAILY - FEMININE ELEGANT',
+      subtitle: 'DAILY · FEMININE ELEGANT',
+      cover: 'image/feminim_elegan (2).png',
+      detailImage: 'image/feminim_elegan (2).png',
+      itemsImage: 'image/feminim_elegan.png',
+      itemsImageAlt: 'Detail DAILY - FEMININE ELEGANT: hijab coklat muda beige, dress coklat mocha, sepatu beige nude, dan palet warna netral hangat',
+      description: 'Dress panjang coklat mocha dengan potongan berpinggang dan rok flowy, dipadukan dengan hijab beige untuk tampilan feminin yang anggun dan nyaman dipakai sehari-hari.',
+      note: 'Padukan dress coklat mocha dengan hijab beige muda dan sepatu nude. Palet warna coklat, mocha, beige, dan nude menjaga tampilan tetap lembut serta serasi untuk aktivitas harian.',
+      items: [
+        { label: 'Hijab', name: 'Coklat muda (beige)' },
+        { label: 'Dress', name: 'Coklat mocha' },
+        { label: 'Sepatu', name: 'Beige nude' }
+      ]
+    },
+    {
+      id: 'taupe-layered',
+      category: 'inverted',
+      shape: 'Inverted Triangle',
+      title: 'Everyday Taupe Layer',
+      subtitle: 'EVERYDAY · TAUPE LAYER',
+      cover: 'image/inverted_triangle_coklat1set.png',
+      detailImage: 'image/inverted_triangle_coklat1set.png',
+      itemsImage: 'image/coklatpisah.png',
+      itemsImageAlt: 'Detail Everyday Taupe Layer: hijab beige cream, outer panjang taupe, atasan dan celana putih, sepatu beige nude, serta tas beige cream',
+      description: 'Paduan hijab beige cream dan outer panjang warna taupe yang dikenakan terbuka di atas atasan serta celana putih, untuk tampilan berlapis yang ringan dan rapi.',
+      note: 'Kenakan outer taupe terbuka di atas atasan putih agar tercipta garis vertikal yang santai. Padukan dengan celana putih, hijab beige cream, tas senada, dan sepatu nude untuk tampilan sehari-hari yang harmonis.',
+      items: [
+        { label: 'Hijab', name: 'Beige cream' },
+        { label: 'Outer', name: 'Taupe panjang' },
+        { label: 'Atasan & bawahan', name: 'Set putih' },
+        { label: 'Sepatu', name: 'Beige nude' },
+        { label: 'Tas', name: 'Beige cream' }
+      ]
+    },
+    {
+      id: 'sage-green',
+      category: 'inverted',
+      shape: 'Inverted Triangle',
+      title: 'Sage Green Set',
+      subtitle: 'EVERYDAY · SAGE GREEN',
+      cover: 'image/inverted_triangle_hijau1set.png',
+      detailImage: 'image/inverted_triangle_hijau1set.png',
+      itemsImage: 'image/hijaupisah.png',
+      itemsImageAlt: 'Detail Sage Green Set: hijab dan celana wide-leg hijau sage, blus putih, sepatu putih, tas putih gading, serta palet warna',
+      description: 'Blus putih berlengan puff dipadukan dengan celana wide-leg hijau sage dan hijab senada, menghadirkan tampilan segar dengan warna lembut.',
+      note: 'Padukan blus putih dengan celana wide-leg hijau sage dan hijab senada. Sepatu putih serta tas putih gading melengkapi look sehari-hari yang ringan dan serasi.',
+      items: [
+        { label: 'Hijab', name: 'Hijau muda (sage)' },
+        { label: 'Atasan', name: 'Blus putih' },
+        { label: 'Bawahan', name: 'Celana wide-leg hijau sage' },
+        { label: 'Sepatu', name: 'Putih' },
+        { label: 'Tas', name: 'Putih gading (cream)' }
+      ]
+    },
+    {
+      id: 'rectangle-taupe-tunic',
+      category: 'rectangle',
+      shape: 'Rectangle',
+      title: 'Taupe Belted Tunic',
+      subtitle: 'EVERYDAY · TAUPE BELTED TUNIC',
+      cover: 'image/rectangle1.jpeg',
+      detailImage: 'image/rectangle1.jpeg',
+      itemsImage: 'image/rectangle2.jpeg',
+      itemsImageAlt: 'Detail Taupe Belted Tunic: hijab beige taupe, tunik belted coklat mocca, celana putih, sepatu beige nude, dan tas beige cream',
+      description: 'Tunik belted warna taupe lembut dipadukan dengan celana putih dan hijab beige untuk tampilan rapi dengan nuansa netral.',
+      note: 'Kenakan tunik belted sebagai fokus outfit, lalu padukan dengan celana putih, hijab beige taupe, sepatu nude, dan tas cream agar tampilan tetap ringan dan serasi.',
+      items: [
+        { label: 'Hijab', name: 'Beige taupe' },
+        { label: 'Atasan', name: 'Tunik belted taupe / mocca' },
+        { label: 'Bawahan', name: 'Celana putih' },
+        { label: 'Sepatu', name: 'Beige nude' },
+        { label: 'Tas', name: 'Beige cream' }
+      ]
+    },
+    {
+      id: 'rectangle-peplum-skirt',
+      category: 'rectangle',
+      shape: 'Rectangle',
+      title: 'Soft Peplum Skirt Set',
+      subtitle: 'SOFT FEMININE · PEPLUM & SKIRT',
+      cover: 'image/rectangle3.jpeg',
+      detailImage: 'image/rectangle3.jpeg',
+      itemsImage: 'image/rectangle33.jpeg',
+      itemsImageAlt: 'Detail Soft Peplum Skirt Set: hijab cream, atasan peplum beige mocca, rok beige mocca, sepatu putih cream, dan tas putih cream',
+      description: 'Atasan peplum beige dengan rok panjang senada membentuk tampilan feminin yang lembut, dilengkapi hijab cream dan aksesori warna terang.',
+      note: 'Padukan atasan peplum dan rok dalam nuansa beige mocca agar terlihat serasi. Hijab cream, sepatu, dan tas warna putih cream melengkapi look feminin untuk kegiatan sehari-hari atau acara santai.',
+      items: [
+        { label: 'Hijab', name: 'Beige cream' },
+        { label: 'Atasan', name: 'Peplum beige mocca' },
+        { label: 'Bawahan', name: 'Rok beige mocca' },
+        { label: 'Sepatu', name: 'Putih cream' },
+        { label: 'Tas', name: 'Putih cream' }
+      ]
+    },
+    {
+      id: 'rectangle-floral-neutral',
+      category: 'rectangle',
+      shape: 'Rectangle',
+      title: 'Floral Neutral Set',
+      subtitle: 'EVERYDAY · FLORAL NEUTRAL',
+      cover: 'image/rectangle4.jpeg',
+      detailImage: 'image/rectangle4.jpeg',
+      itemsImage: 'image/rectangle44.jpeg',
+      itemsImageAlt: 'Detail Floral Neutral Set: hijab beige cream, blus motif bunga coklat, celana wide-leg beige mocca, sepatu beige cream, dan tas putih cream',
+      description: 'Blus motif bunga bernuansa cream dan coklat dipadukan dengan celana wide-leg beige, menciptakan outfit santai yang manis dan tetap rapi.',
+      note: 'Biarkan motif floral menjadi aksen, lalu seimbangkan dengan celana wide-leg beige mocca dan hijab beige cream. Sepatu serta tas warna cream menyatukan keseluruhan tampilan.',
+      items: [
+        { label: 'Hijab', name: 'Beige cream' },
+        { label: 'Atasan', name: 'Blus floral cream-coklat' },
+        { label: 'Bawahan', name: 'Celana wide-leg beige mocca' },
+        { label: 'Sepatu', name: 'Beige cream' },
+        { label: 'Tas', name: 'Putih cream' }
+      ]
+    },
+    {
+      id: 'hourglass-striped',
+      category: 'hourglass',
+      shape: 'Hourglass',
+      title: 'Classic Stripe Set',
+      subtitle: 'SMART CASUAL · BLACK & WHITE STRIPES',
+      cover: 'image/hourglas11.jpeg',
+      detailImage: 'image/hourglas11.jpeg',
+      itemsImage: 'image/hourglas1.jpeg',
+      itemsImageAlt: 'Detail Classic Stripe Set: hijab hitam, atasan garis hitam-putih, celana putih wide-leg, sepatu beige cream, tas hitam, dan palet warna',
+      description: 'Atasan rajut bergaris hitam-putih dipadukan dengan celana putih wide-leg dan hijab hitam untuk tampilan smart casual yang clean.',
+      note: 'Jadikan atasan garis sebagai aksen, lalu seimbangkan dengan celana putih dan hijab hitam. Sepatu beige cream memberi sentuhan lembut, sementara tas hitam mengikat keseluruhan look.',
+      items: [
+        { label: 'Hijab', name: 'Hitam' },
+        { label: 'Atasan', name: 'Rajut garis hitam-putih' },
+        { label: 'Bawahan', name: 'Celana wide-leg putih' },
+        { label: 'Sepatu', name: 'Beige cream' },
+        { label: 'Tas', name: 'Hitam' }
+      ]
+    },
+    {
+      id: 'hourglass-tweed-skirt',
+      category: 'hourglass',
+      shape: 'Hourglass',
+      title: 'Cream Tweed & Black Skirt',
+      subtitle: 'ELEGANT · TWEED & SKIRT',
+      cover: 'image/hourglass22.jpeg',
+      detailImage: 'image/hourglass22.jpeg',
+      itemsImage: 'image/horglass2.jpeg',
+      itemsImageAlt: 'Detail Cream Tweed & Black Skirt: hijab beige cream, blazer tweed krem, rok hitam, sandal hitam, tas hitam, dan palet warna',
+      description: 'Blazer tweed krem dipadukan dengan rok hitam panjang, hijab beige cream, dan aksesori hitam untuk tampilan elegan.',
+      note: 'Padukan tekstur tweed krem dengan rok hitam sebagai kontras utama. Hijab beige cream melembutkan kombinasi warna, sementara sandal dan tas hitam menjaga tampilan tetap serasi.',
+      items: [
+        { label: 'Hijab', name: 'Beige cream' },
+        { label: 'Outer', name: 'Blazer tweed krem' },
+        { label: 'Bawahan', name: 'Rok hitam panjang' },
+        { label: 'Sepatu', name: 'Sandal hitam' },
+        { label: 'Tas', name: 'Hitam' }
+      ]
+    },
+    {
+      id: 'hourglass-denim',
+      category: 'hourglass',
+      shape: 'Hourglass',
+      title: 'Cream Top & Denim',
+      subtitle: 'CASUAL · CREAM & DENIM',
+      cover: 'image/hourglas33.jpeg',
+      detailImage: 'image/hourglas33.jpeg',
+      itemsImage: 'image/hourglass3.jpeg',
+      itemsImageAlt: 'Detail Cream Top & Denim: hijab beige taupe, atasan cream lengan lebar, celana jeans wide-leg biru, sneakers putih, tas putih cream, dan palet warna',
+      description: 'Atasan cream berlengan lebar dipadukan dengan jeans wide-leg biru dan hijab beige taupe untuk gaya kasual yang nyaman.',
+      note: 'Pasangkan atasan cream dengan jeans wide-leg agar tampilan terasa santai. Hijab beige taupe, sneakers putih, dan tas putih cream melengkapi palet warna netral-biru.',
+      items: [
+        { label: 'Hijab', name: 'Beige taupe' },
+        { label: 'Atasan', name: 'Atasan cream lengan lebar' },
+        { label: 'Bawahan', name: 'Jeans wide-leg biru' },
+        { label: 'Sepatu', name: 'Sneakers putih' },
+        { label: 'Tas', name: 'Putih cream' }
+      ]
+    },
+    {
+      id: 'balanced-camel-blazer',
+      category: 'balanced',
+      shape: 'Balanced',
+      title: 'Camel Blazer & Tailored Trousers',
+      subtitle: 'SMART CASUAL · CAMEL & CREAM',
+      cover: 'image/balanced1.jpeg',
+      detailImage: 'image/balanced1.jpeg',
+      itemsImage: 'image/balanced11.jpeg',
+      itemsImageAlt: 'Detail Camel Blazer & Tailored Trousers: hijab beige cream, blazer camel, inner putih, celana tailored beige, heels cream, tas beige, dan palet warna',
+      description: 'Blazer camel dikenakan di atas inner putih dan celana tailored beige, dipadukan dengan hijab serta aksesori bernuansa cream untuk tampilan smart casual yang rapi.',
+      note: 'Pertahankan nuansa netral dengan blazer camel, inner putih, dan celana beige. Hijab, tas, serta heels cream melengkapi look yang serasi untuk acara semi-formal atau kegiatan sehari-hari.',
+      items: [
+        { label: 'Hijab', name: 'Beige cream' },
+        { label: 'Outer', name: 'Blazer camel' },
+        { label: 'Inner', name: 'Putih' },
+        { label: 'Bawahan', name: 'Celana tailored beige' },
+        { label: 'Sepatu', name: 'Heels cream' },
+        { label: 'Tas', name: 'Beige cream' }
+      ]
+    },
+    {
+      id: 'balanced-knit-skirt',
+      category: 'balanced',
+      shape: 'Balanced',
+      title: 'Soft Knit & Cream Skirt',
+      subtitle: 'SOFT FEMININE · TAUPE & CREAM',
+      cover: 'image/balanced2.jpeg',
+      detailImage: 'image/balanced2.jpeg',
+      itemsImage: 'image/balanced22.jpeg',
+      itemsImageAlt: 'Detail Soft Knit & Cream Skirt: hijab beige, sweater rajut taupe, rok panjang cream, ankle boots beige, tas bahu coklat, dan palet warna',
+      description: 'Sweater rajut taupe dipadukan dengan rok panjang cream, hijab beige, ankle boots senada, dan tas bahu coklat untuk tampilan feminin yang lembut.',
+      note: 'Padukan tekstur sweater rajut taupe dengan rok cream yang flowy. Hijab dan ankle boots beige menjaga kesan lembut, sementara tas coklat memberi aksen warna yang hangat.',
+      items: [
+        { label: 'Hijab', name: 'Beige' },
+        { label: 'Atasan', name: 'Sweater rajut taupe' },
+        { label: 'Bawahan', name: 'Rok panjang cream' },
+        { label: 'Sepatu', name: 'Ankle boots beige' },
+        { label: 'Tas', name: 'Coklat' }
+      ]
+    },
+    {
+      id: 'balanced-denim-layer',
+      category: 'balanced',
+      shape: 'Balanced',
+      title: 'Beige Denim Layer',
+      subtitle: 'CASUAL · BEIGE & BLUE DENIM',
+      cover: 'image/balanced3.jpeg',
+      detailImage: 'image/balanced3.jpeg',
+      itemsImage: 'image/balanced33.jpeg',
+      itemsImageAlt: 'Detail Beige Denim Layer: hijab beige, jaket denim beige, inner putih, jeans wide-leg biru, tas coklat, sepatu pointed cream, dan palet warna',
+      description: 'Jaket denim beige dan inner putih dipadukan dengan jeans wide-leg biru, hijab beige, tas coklat, serta sepatu cream untuk gaya kasual.',
+      note: 'Jadikan jaket denim beige sebagai layer di atas inner putih, lalu padukan dengan jeans wide-leg biru. Hijab beige menyatukan warna netral, sementara tas coklat dan sepatu cream melengkapi tampilan.',
+      items: [
+        { label: 'Hijab', name: 'Beige' },
+        { label: 'Outer', name: 'Jaket denim beige' },
+        { label: 'Inner', name: 'Putih' },
+        { label: 'Bawahan', name: 'Jeans wide-leg biru' },
+        { label: 'Sepatu', name: 'Pointed shoes cream' },
+        { label: 'Tas', name: 'Coklat' }
+      ]
+    }
+  ];
+
+  const outfitLibrary = [
+    { id: 1, type: 'top', title: 'Everyday textured top', meta: 'ATASAN · CASUAL', desc: 'Kemeja ringan, knit top, atau atasan bertekstur untuk tampilan santai yang tetap rapi.', tip: 'Padukan dengan denim, tailored pants, atau bawahan favoritmu.', tone: 1, garment: 'top' },
+    { id: 2, type: 'bottom', title: 'Relaxed straight-leg pants', meta: 'BAWAHAN · EVERYDAY', desc: 'Celana straight-cut atau wide-leg yang nyaman dan mudah dipadukan.', tip: 'Coba warna netral agar mudah masuk ke banyak outfit.', tone: 2, garment: 'bottom' },
+    { id: 3, type: 'onepiece', title: 'Easy matching outfit', meta: 'ONE-PIECE · SMART CASUAL', desc: 'Dress, jumpsuit, atau matching set dengan potongan yang nyaman sesuai preferensimu.', tip: 'Pilih model dan panjang yang cocok untuk aktivitasmu.', tone: 3, garment: 'onepiece' },
+    { id: 4, type: 'layer', title: 'Soft structured outer', meta: 'OUTERWEAR · LAYERING', desc: 'Outer ringan seperti overshirt, blazer santai, atau cardigan untuk variasi tampilan.', tip: 'Pakai terbuka atau ditutup sesuai mood dan cuaca.', tone: 4, garment: 'layer' },
+    { id: 5, type: 'top', title: 'Clean-cut shirt', meta: 'ATASAN · MINIMAL', desc: 'Kemeja dengan garis sederhana yang bisa dipakai sendiri atau sebagai layering.', tip: 'Eksplorasi warna earth tone, putih gading, atau warna favoritmu.', tone: 5, garment: 'top' },
+    { id: 6, type: 'bottom', title: 'Pleated or A-line bottom', meta: 'BAWAHAN · VERSATILE', desc: 'Rok A-line atau celana berlipit sebagai opsi potongan yang berbeda.', tip: 'Pilih material yang nyaman dan tidak membatasi gerak.', tone: 6, garment: 'bottom' },
+    { id: 7, type: 'top', title: 'Simple top - Everyday Casual', meta: 'ATASAN · RELAXED', desc: 'Atasan V-neck polos untuk gaya kasual.', tip: 'Coba bawahan dengan celana pleated wide-leg untuk gaya kasual, detail lipit atau tekstur.', tone: 1, garment: 'top' },
+    { id: 8, type: 'bottom', title: 'Easy wide-leg trousers', meta: 'BAWAHAN · RELAXED FIT', desc: 'Celana wide-leg sebagai pilihan santai yang mudah dipadukan.', tip: 'Padukan dengan atasan simpel untuk tampilan yang seimbang.', tone: 2, garment: 'bottom' },
+    { id: 9, type: 'onepiece', title: 'Wrap Midi Dress', meta: 'ONE-PIECE · SOFT FEMININE', desc: 'Wrap dress dengan detail ikat dan rok jatuh untuk gaya elegan.', tip: 'Pilih motif sederhana dan variasi panjang lengan sesuai selera.', tone: 3, garment: 'onepiece' },
+    { id: 10, type: 'layer', title: 'Peplum Blazer', meta: 'OUTERWARE • ELEGANT CHIC', desc: 'Blazer dengan detail peplum yang memberikan variasi bentuk pada outfit.', tip: 'Padukan dengan celana straight-leg atau rok panjang.', tone: 4, garment: 'layer' },
+    { id: 11, type: 'layer', title: 'Casual denim combination', meta: 'OUTERWEAR · STREET CASUAL', desc: 'Denim jacket ringan dengan kaus polos untuk gaya sehari-hari.', tip: 'Pilih cargo pants, wide-leg jeans, atau relaxed trousers untuk bawahan.', tone: 5, garment: 'top' },
+    { id: 12, type: 'layer', title: 'Cropped Cardigan', meta: 'OUTERWARE • SOFT CASUAL', desc: 'Cardigan pendek dengan bahan knit untuk tampilan santai dan manis.', tip: 'Padukan dengan celana high-waist atau rok panjang.', tone: 6, garment: 'bottom' }
+  ];
+
+  const outfitReferenceImages = {
+    1: { src: 'image/knitt.jpeg', alt: 'Inspirasi outfit knit' },
+    2: { src: 'image/widelag.jpeg', alt: 'Inspirasi outfit wide leg' },
+    3: { src: 'image/1set.jpeg', alt: 'Inspirasi outfit satu set' },
+    4: { src: 'image/outeran.jpeg', alt: 'Inspirasi outfit outerwear' },
+    5: { src: 'image/kemeja.jpeg', alt: 'Inspirasi outfit kemeja' },
+    6: { src: 'image/rokA.jpeg', alt: 'Inspirasi rok A-line' },
+    7: { src: 'image/style7.jpeg', alt: 'Inspirasi outfit style 7' },
+    8: { src: 'image/style8.jpeg', alt: 'Inspirasi outfit style 8' },
+    9: { src: 'image/wrapmidi.jpeg', alt: 'Inspirasi wrap midi dress' },
+    10: { src: 'image/peplum.jpeg', alt: 'Inspirasi peplum' },
+    11: { src: 'image/denim.jpeg', alt: 'Inspirasi outfit denim' },
+    12: { src: 'image/cardigan.jpeg', alt: 'Inspirasi outfit cardigan' }
+  };
+
+  const shapeInfo = {
+    pear: { name: 'Pear Shape', desc: 'Ukuran pinggul pada data yang kamu masukkan cenderung lebih besar dibanding area dada. Ini hanya gambaran proporsi, bukan label yang membatasi pilihan pakaian.', tags: ['Lower proportion', 'Soft balance', 'Explore your style'] },
+    hourglass: { name: 'Hourglass', desc: 'Area dada dan pinggul terlihat relatif seimbang, dengan ukuran pinggang yang lebih kecil pada data pengukuranmu.', tags: ['Upper-lower balance', 'Defined waist ratio', 'Explore your style'] },
+    inverted: { name: 'Inverted Triangle', desc: 'Area dada pada data yang dimasukkan cenderung lebih besar dibanding area pinggul. Banyak pilihan potongan bisa kamu eksplorasi.', tags: ['Upper proportion', 'Relaxed silhouettes', 'Explore your style'] },
+    rectangle: { name: 'Rectangle', desc: 'Ukuran dada, pinggang, dan pinggul pada data ini relatif berdekatan. Layering dan variasi potongan bisa jadi cara seru bereksperimen.', tags: ['Similar measurements', 'Clean lines', 'Explore your style'] },
+    balanced: { name: 'Balanced', desc: 'Tidak ada perbedaan ukuran atas dan bawah yang sangat dominan pada data ini. Kamu bisa bereksperimen dengan beragam potongan.', tags: ['Balanced proportions', 'Versatile styling', 'Explore your style'] }
+  };
+
+  profile = loadProfile();
+
+  const shapeImages = {
+    pear: 'image/pear.jpeg',
+    hourglass: 'image/hourglass.jpeg',
+    inverted: 'image/triangle.jpeg',
+    rectangle: 'image/rectangle.jpeg',
+    balanced: 'image/balanced.jpeg'
+  };
+
+  const shapeTips = {
+    pear: {
+      top: 'Coba kemeja berkerah, atasan bertekstur, atau warna yang kamu suka untuk variasi tampilan bagian atas.',
+      bottom: 'Straight-leg, wide-leg, atau A-line bisa menjadi opsi nyaman untuk dicoba.',
+      onepiece: 'Eksplorasi dress, jumpsuit, atau matching set dengan detail yang kamu sukai.',
+      layer: 'Overshirt atau outer berstruktur ringan bisa menjadi pilihan layering.'
+    },
+    hourglass: {
+      top: 'Wrap top, kemeja, atau atasan fitted yang tetap nyaman bisa masuk ke pilihanmu.',
+      bottom: 'High-rise, straight-leg, atau rok favorit bisa dipadukan dengan berbagai atasan.',
+      onepiece: 'Coba wrap dress, jumpsuit, atau matching set sesuai selera.',
+      layer: 'Cardigan pendek atau blazer santai bisa melengkapi tampilan.'
+    },
+    inverted: {
+      top: 'Atasan berpotongan simpel atau relaxed fit bisa menjadi opsi sehari-hari.',
+      bottom: 'Wide-leg, pleated pants, atau bawahan bertekstur bisa dicoba untuk variasi siluet.',
+      onepiece: 'Pilih dress, jumpsuit, atau matching set dengan potongan yang terasa nyaman.',
+      layer: 'Outer ringan dengan garis sederhana mudah dipadukan dengan outfit harian.'
+    },
+    rectangle: {
+      top: 'Coba layered shirt, knit top, atau atasan dengan detail yang kamu sukai.',
+      bottom: 'Straight-leg, cargo, pleated pants, atau rok bisa memberi variasi tampilan.',
+      onepiece: 'Matching set, jumpsuit, atau dress simpel bisa jadi pilihan praktis.',
+      layer: 'Eksplorasi cardigan, overshirt, dan blazer untuk permainan layering.'
+    },
+    balanced: {
+      top: 'Kemeja, knit top, kaus, atau atasan favorit bisa dieksplorasi dengan leluasa.',
+      bottom: 'Beragam potongan seperti straight-leg, wide-leg, dan rok bisa dicoba.',
+      onepiece: 'Dress, jumpsuit, dan matching set sama-sama bisa menjadi pilihan.',
+      layer: 'Pilih outer berdasarkan suasana, cuaca, dan gaya yang ingin kamu tampilkan.'
+    }
+  };
+
+  const outfitRecommendations = {
+    balanced: [1, 2, 3, 5, 6, 9, 11],
+    rectangle: [1, 4, 6, 9, 10, 12, 3],
+    hourglass: [2, 3, 5, 7, 9, 11, 12],
+    inverted: [2, 6, 8, 7, 9, 3],
+    pear: [1, 4, 5, 7, 11, 12]
+  };
+
+  function loadProfile() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !shapeInfo[parsed.shape]) return null;
+      return parsed;
+    } catch (error) {
+      console.warn('Profil lokal tidak dapat dibaca:', error);
+      return null;
+    }
+  }
+
+  function saveProfile() {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+      return true;
+    } catch (error) {
+      console.warn('Penyimpanan lokal tidak tersedia:', error);
+      showToast('Hasil tampil, tetapi browser tidak mengizinkan penyimpanan lokal.');
+      return false;
+    }
+  }
+
+  function showToast(message) {
+    const el = $('toast');
+    if (!el) return;
+    el.textContent = message;
+    el.classList.add('show');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => el.classList.remove('show'), 2800);
+  }
+
+  function showPage(name) {
+    const target = $(`page-${name}`);
+    if (!target) return;
+    document.querySelectorAll('.page').forEach((page) => page.classList.toggle('active', page === target));
+    document.querySelectorAll('[data-page]').forEach((button) => button.classList.toggle('active', button.dataset.page === name));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (name === 'wardrobe') renderWardrobe();
+  }
+
+  document.querySelectorAll('[data-page]').forEach((button) => {
+    button.addEventListener('click', () => showPage(button.dataset.page));
+  });
+  document.querySelectorAll('[data-home]').forEach((button) => {
+    button.addEventListener('click', (event) => { event.preventDefault(); showPage('home'); });
+  });
+  $('menuToggle')?.addEventListener('click', () => showToast('Gunakan navigasi di bagian bawah layar.'));
+
+  function getNum(id) {
+    const raw = $(id)?.value?.trim();
+    if (!raw) return null;
+    const value = Number(raw);
+    return Number.isFinite(value) ? value : null;
+  }
+
+  // Klasifikasi proporsi (perkiraan untuk eksplorasi styling, bukan standar universal).
+  // Tahap 1: bandingkan lingkar dada dan pinggul. Jika selisih >5%, arah proporsi
+  // menentukan Pear atau Inverted Triangle. Tahap 2: jika keduanya berdekatan,
+  // gunakan rasio pinggang terhadap rata-rata dada dan pinggul.
+  // Lebar bahu opsional dicatat, tetapi tidak dibandingkan dengan lingkar tubuh
+  // karena itu ukuran lebar, bukan ukuran lingkar.
+  function classify({ bust, waist, hips }) {
+    const upperLowerAverage = (bust + hips) / 2;
+    const upperLowerGap = Math.abs(bust - hips) / Math.max(bust, hips);
+    const waistRatio = waist / upperLowerAverage;
+
+    // Dominasi area atas/bawah diprioritaskan agar tidak tertimpa rasio pinggang.
+    if (upperLowerGap > 0.05) {
+      return hips > bust ? 'pear' : 'inverted';
+    }
+
+    // Jika dada dan pinggul relatif seimbang, klasifikasikan dari rasio pinggang.
+    if (waistRatio <= 0.75) return 'hourglass';
+    if (waistRatio >= 0.82) return 'rectangle';
+    return 'balanced';
+  }
+
+  function handleAnalysis(event) {
+    event.preventDefault();
+    const bust = getNum('bust');
+    const waist = getNum('waist');
+    const hips = getNum('hips');
+    const height = getNum('height');
+    const shoulders = getNum('shoulders');
+
+    if (bust === null || waist === null || hips === null) {
+      showToast('Isi ukuran dada, pinggang, dan pinggul terlebih dahulu.');
+      return;
+    }
+    if ([bust, waist, hips].some((value) => value < 20 || value > 220) ||
+        (height !== null && (height < 100 || height > 230)) ||
+        (shoulders !== null && (shoulders < 10 || shoulders > 100))) {
+      showToast('Periksa kembali angka pengukuran yang dimasukkan.');
+      return;
+    }
+
+    profile = {
+      height, bust, waist, hips, shoulders,
+      shape: classify({ bust, waist, hips }),
+      updatedAt: new Date().toISOString()
+    };
+    currentFilter = 'all';
+    saveProfile();
+    renderResult();
+    renderWardrobe();
+    $('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Hasil analisis berhasil dibuat.');
+  }
+
+  $('measurementForm')?.addEventListener('submit', handleAnalysis);
+
+  // Satu fungsi untuk membersihkan seluruh data, baik dari tombol form
+  // maupun tombol reset pada bagian hasil analisis.
+  function clearAllProfileData() {
+    try { window.localStorage.removeItem(STORAGE_KEY); } catch (error) { console.warn(error); }
+    profile = null;
+    $('measurementForm')?.reset();
+    $('shapeQuizForm')?.reset();
+    $('resultSection')?.classList.add('hidden');
+    $('customShapeImage')?.classList.add('hidden');
+    $('customShapeImage')?.removeAttribute('src');
+    currentFilter = 'all';
+    renderWardrobe();
+    showToast('Semua data, hasil analisis, dan isian form berhasil dibersihkan.');
+  }
+
+  $('clearForm')?.addEventListener('click', clearAllProfileData);
+  $('resetProfile')?.addEventListener('click', clearAllProfileData);
+
+  // Pilihan metode analisis: pengukuran atau kuis pengalaman berpakaian.
+  document.querySelectorAll('[data-method]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const method = button.dataset.method;
+      document.querySelectorAll('[data-method]').forEach((item) => item.classList.toggle('active', item === button));
+      $('measurementMethod').classList.toggle('hidden', method !== 'measure');
+      $('quizMethod').classList.toggle('hidden', method !== 'quiz');
+    });
+  });
+
+  $('shapeQuizForm')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const answers = [1,2,3,4,5].map((n) => data.get(`q${n}`));
+    if (answers.some((answer) => !answer)) { showToast('Jawab semua pertanyaan terlebih dahulu.'); return; }
+    const scores = { pear: 0, inverted: 0, hourglass: 0, rectangle: 0, balanced: 0 };
+    answers.forEach((answer) => {
+      if (answer === 'lower') scores.pear += 1;
+      if (answer === 'upper') scores.inverted += 1;
+      if (answer === 'waist' || answer === 'curved') scores.hourglass += 1;
+      if (answer === 'straight') scores.rectangle += 1;
+      if (answer === 'same' || answer === 'balanced' || answer === 'mix') scores.balanced += 1;
+    });
+    const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+    const topScore = sorted[0][1];
+    const tied = sorted.filter((entry) => entry[1] === topScore);
+    const selectedShape = topScore === 0 || tied.length > 1 ? 'balanced' : sorted[0][0];
+    profile = {
+      shape: selectedShape, method: 'quiz', quizAnswers: answers,
+      updatedAt: new Date().toISOString()
+    };
+    currentFilter = 'all';
+    saveProfile(); renderResult(); renderWardrobe();
+    $('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Hasil kuis berhasil dibuat. Ini hanya perkiraan untuk eksplorasi style.');
+  });
+
+  function renderResult() {
+    if (!profile) return;
+    const info = shapeInfo[profile.shape];
+    $('resultSection').classList.remove('hidden');
+    $('shapeName').textContent = info.name;
+    $('shapeDescription').textContent = profile.method === 'quiz' ? 'Kategori ini merupakan perkiraan dari jawaban kuis tentang pengalaman memilih pakaian, bukan hasil pengukuran. Gunakan sebagai inspirasi styling saja.' : info.desc;
+    $('resultTags').innerHTML = info.tags.map((tag) => `<span>${tag}</span>`).join('');
+    const stats = profile.method === 'quiz'
+      ? [['METODE', 'Kuis sederhana'], ['JAWABAN', '5 pertanyaan'], ['HASIL', 'Perkiraan'], ['TUJUAN', 'Eksplorasi style']]
+      : [['HEIGHT', profile.height ? `${profile.height} cm` : '—'], ['CHEST', `${profile.bust} cm`], ['WAIST', `${profile.waist} cm`], ['HIPS', `${profile.hips} cm`]];
+    $('statsRow').innerHTML = stats.map(([label, value]) => `<div class="stat-box"><span>${label}</span><b>${value}</b></div>`).join('');
+    $('shapeVisual').dataset.shape = profile.shape;
+    $('shapeResultImage').src = shapeImages[profile.shape];
+    $('shapeResultImage').alt = `Ilustrasi bentuk tubuh ${info.name}`;
+    $('wardrobeProfile').textContent = info.name;
+    renderResultRecommendations();
+  }
+
+  function renderResultRecommendations() {
+    const grid = $('resultOutfitGrid');
+    if (!grid || !profile) return;
+    const recommended = outfitSets
+      .filter((set) => set.shape === shapeInfo[profile.shape].name)
+      .slice(0, 3);
+    grid.innerHTML = recommended.map((set) => {
+      const styleNumber = String(outfitSets.indexOf(set) + 1).padStart(2, '0');
+      return `
+        <button class="outfit-card outfit-set-card" type="button" data-open-recommendation="${set.id}" aria-label="Lihat detail ${set.title}">
+          <div class="outfit-art outfit-set-cover${set.detailImage ? ' outfit-portrait-cover' : ''}">
+            ${set.cover ? `<img class="outfit-cover-image" src="${set.cover}" alt="Foto outfit ${set.title}" loading="lazy" />` : `<div class="outfit-empty-placeholder"><span>FOTO OUTFIT</span><small>Gambar akan ditambahkan manual</small></div>`}
+            <span class="outfit-open-hint">VIEW THE SET ↗</span>
+          </div>
+          <div class="outfit-info">
+            <span class="outfit-meta">STYLE ${styleNumber} · ${set.subtitle}</span>
+            <h3>${set.title}</h3>
+            <p>${set.description}</p>
+            <div class="outfit-tip">✳ Klik foto untuk melihat detail set</div>
+          </div>
+        </button>`;
+    }).join('');
+    const count = grid.querySelectorAll('.outfit-set-card').length;
+    const countLabel = document.querySelector('.recommendation-count');
+    if (countLabel) countLabel.textContent = `${count} OUTFIT`;
+  }
+
+  function getOutfitText(item) {
+    const style = profile?.style || 'all';
+    let title = item.title;
+    if (item.id === 3) {
+      if (style === 'feminine') title = 'Easy day dress';
+      else if (style === 'masculine') title = 'Relaxed jumpsuit / co-ord';
+      else if (style === 'androgynous') title = 'Minimal matching set';
+      else title = 'Easy one-piece & matching set';
+    }
+    const personalizedTip = profile ? (shapeTips[profile.shape]?.[item.type] || item.tip) : item.tip;
+    return { title, tip: personalizedTip };
+  }
+
+  function renderWardrobe() {
+    if (!$('outfitGrid')) return;
+    $('wardrobeProfile').textContent = profile
+      ? `Semua 15 outfit · hasil analisismu ${shapeInfo[profile.shape].name}`
+      : 'Semua 15 outfit dari 5 body shape';
+
+    const cards = outfitSets.filter((set) => currentFilter === 'all' || set.category === currentFilter);
+    document.querySelectorAll('.filter-chip').forEach((button) => {
+      button.classList.toggle('active', (button.dataset.filter || 'all') === currentFilter);
+    });
+
+    $('outfitGrid').innerHTML = cards.map((set) => `
+      <button class="outfit-card outfit-set-card" type="button" data-open-outfit="${set.id}" aria-label="Lihat detail ${set.title}">
+        <div class="outfit-art outfit-set-cover${set.detailImage ? ' outfit-portrait-cover' : ''}">
+          ${set.cover ? `<img class="outfit-cover-image" src="${set.cover}" alt="Foto outfit ${set.title}" loading="lazy" />` : `<div class="outfit-empty-placeholder"><span>FOTO OUTFIT</span><small>Gambar akan ditambahkan manual</small></div>`}
+          <span class="outfit-open-hint">VIEW THE SET ↗</span>
+        </div>
+        <div class="outfit-info">
+          <span class="outfit-meta">STYLE ${String(outfitSets.indexOf(set) + 1).padStart(2, '0')} · ${set.subtitle}</span>
+          <h3>${set.title}</h3>
+          <p>${set.description}</p>
+          <div class="outfit-tip">✳ Klik foto untuk melihat detail set</div>
+        </div>
+      </button>
+    `).join('');
+  }
+
+  function openOutfitDetail(setId) {
+    const set = outfitSets.find((item) => item.id === setId);
+    if (!set || !$('outfitDetailModal')) return;
+    $('outfitDetailContent').innerHTML = `
+      <div class="outfit-detail-heading">
+        <span class="step-label">${set.subtitle}</span>
+        <h2 id="outfitDetailTitle">${set.title}</h2>
+        ${set.shape ? `<p class="outfit-shape-tag">DIREKOMENDASIKAN UNTUK · ${set.shape}</p>` : ''}
+        <p>${set.description}</p>
+      </div>
+      ${set.detailImage
+        ? `<div class="outfit-detail-cover outfit-detail-portrait"><img src="${set.detailImage}" alt="Foto utama outfit ${set.title}" /></div>`
+        : `<div class="outfit-detail-cover"><div class="outfit-empty-placeholder"><span>FOTO UTAMA OUTFIT</span><small>Gambar akan ditambahkan manual</small></div></div>`}
+      ${set.itemsImage
+        ? `<div class="outfit-detail-landscape"><img src="${set.itemsImage}" alt="${set.itemsImageAlt || `Foto landscape item outfit ${set.title}`}" /></div>`
+        : `<div class="outfit-detail-items">
+          ${set.items.map((item) => `
+            <article class="outfit-piece">
+              <div class="outfit-piece-image"><div class="outfit-empty-placeholder"><span>FOTO ITEM</span><small>Gambar akan ditambahkan manual</small></div></div>
+              <div class="outfit-piece-copy"><span>${item.label}</span><h3>${item.name}</h3></div>
+            </article>
+          `).join('')}
+        </div>`}
+      <div class="outfit-detail-note"><span>✳ STYLING NOTES</span><p>${set.note}</p></div>
+    `;
+    $('outfitDetailModal').classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeOutfitDetail() {
+    $('outfitDetailModal')?.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+  }
+
+  $('outfitGrid')?.addEventListener('click', (event) => {
+    const card = event.target.closest('[data-open-outfit]');
+    if (card) openOutfitDetail(card.dataset.openOutfit);
+  });
+  $('resultOutfitGrid')?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-open-recommendation]');
+    if (!button) return;
+    const setId = button.dataset.openRecommendation;
+    openOutfitDetail(setId);
+  });
+  $('outfitDetailModal')?.addEventListener('click', (event) => {
+    if (event.target.closest('[data-close-outfit]')) closeOutfitDetail();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeOutfitDetail();
+  });
+
+  document.querySelectorAll('.filter-chip').forEach((button) => {
+    button.addEventListener('click', () => {
+      currentFilter = button.dataset.filter || 'all';
+      renderWardrobe();
+    });
+  });
+
+  $('shapeImage')?.addEventListener('change', (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      showToast('Pilih file gambar yang valid.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      $('customShapeImage').src = String(reader.result);
+      $('customShapeImage').classList.remove('hidden');
+      showToast('Visual pilihanmu berhasil ditampilkan.');
+    };
+    reader.onerror = () => showToast('Gambar tidak dapat dibaca. Coba file lain.');
+    reader.readAsDataURL(file);
+  });
+
+  function restoreForm() {
+    if (!profile) return;
+    if (profile.method === 'quiz') {
+      document.querySelector('[data-method="quiz"]')?.click();
+    } else {
+      ['height', 'shoulders', 'bust', 'waist', 'hips'].forEach((key) => { $(key).value = profile[key] ?? ''; });
+    }
+    renderResult();
+  }
+
+
+  restoreForm();
+  renderWardrobe();
+})();
+</script>
+</body>
+</html>
